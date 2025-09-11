@@ -1,3 +1,5 @@
+
+
 class fine:
     def __init__(self):
         """
@@ -10,11 +12,16 @@ class fine:
         - [Q']()
         - [ℝ]()
         """
-        self.NeturalNumber = self.NeturalNumbers()
 
-    def NeturalNumbers(self,n=100,type=0):
+        self.NTN = self.NeturalNumbers()
+        """**Netural Number ℕ**"""
+        
+        self.WN = self.WholeNumbers()
+        """**Whole Number ℤ₀**"""
+
+    def NeturalNumbers(self,n=10,type=0):
         """ ## Natural Numbers - ℕ 
-            > **The numbers used to count objects or things. **
+            > **The numbers used to count objects or things.**
             > **Numbers - ℕ**
 
             - stop last number : n = 1...1000000
@@ -31,10 +38,13 @@ class fine:
         obj = {}
         stri = ""
         try:
-            for NTN in range(1,n):
-                arr.append(NTN)
-                obj[NTN] = NTN
-                stri += str(NTN) + ","
+            for NTN in range(1,n+1):
+                if type == 0:
+                    arr.append(NTN)
+                elif type == 1:
+                    obj[NTN] = NTN
+                elif type == 2:
+                    stri += str(NTN) + ","
 
         except Exception as e:
             print(f"Error : {e}")
@@ -46,21 +56,45 @@ class fine:
             elif type == 2:
                 return stri.rstrip(", ")
             
-    def WholeNumbers():
+    def WholeNumbers(self,n=10,type=0):
         """
          ## Whole Numbers - ℤ₀
 
         """
+        try:
+            a = self.NeturalNumbers(n,type)
+        except Exception  as e:
+            print(f"Whole Numbers Error : {e}")
+        else:
+            if type == 0:
+                a.insert(0,0)
+                return a
+            elif type == 1:
+                # main logics in object dictory
+                a[0] = 0
+                main_obj = {}
+                for i in sorted(a.keys()):
+                    main_obj[i] = i
+                return main_obj
+
+            elif type == 2:
+                b = a.split(',')
+                b.insert(0,"0")
+                a = ','.join(b)
+                return a
 
     def IntegerNumbers():
         """
         ## Integer - ℤ
         """
+        pass
 
             
     
 
 M = fine()
-M.NeturalNumbers()
-
-print()
+print(f"Nutural Number : {M.NTN}")
+print(f"Whole Number : {M.WN}")
+print(M.WholeNumbers(10,0)) # list
+print(M.WholeNumbers(10,1)) # dict
+print(M.WholeNumbers(10,2)) # str
